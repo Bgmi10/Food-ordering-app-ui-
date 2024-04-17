@@ -1,6 +1,7 @@
 import React from 'react'
 import Carousel from './Carousel'
 import Toprestaurant from './Toprestaurant'
+import Restaurantwithonlinefood from './Restaurantwithonlinefood'
 
 
 
@@ -10,6 +11,7 @@ const Body = () => {
     <div>
     < Carousel />
     < Toprestaurant />
+    <Restaurantwithonlinefood />
    
 
     </div>

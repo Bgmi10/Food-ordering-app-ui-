@@ -42,7 +42,7 @@ const Rescard = () => {
   };
 
 
-  const settings = {
+   const settings = {
     dots: false,
     infinite : false ,
     speed : 500,
@@ -72,7 +72,7 @@ const Rescard = () => {
       
       <div>
         <div  className='relative'>
-      <Slider {...settings} className='h-auto w-auto ml-40 mt-4 border-b-2'>
+      <Slider {...settings} className='h-auto w-auto ml-40 mt-4 border-b-2 '>
         {carosuelImages?.map((imageId, index) => (
           <div key={index} className="px-2">
             <img
