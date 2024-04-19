@@ -1,15 +1,39 @@
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
+import React, { useState, useSyncExternalStore } from 'react';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
+import { checkValidData } from '../utils/validate';
+import { useAuth0 } from "@auth0/auth0-react";
+import Oauthlogin from './Oauthlogin';
+
+
 
 const Drawer = ({ isOpen, onClose }) => {
   const [signin, setsignin] = useState(true);
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+  const [username, setusername] = useState('');
+  const [err, seterr] = useState("")
+
+  const { loginWithRedirect } = useAuth0();
 
   const toggleSignin = () => {
     setsignin(!signin);
   };
+
+ 
+  
+
+  const handleLoginButtonClick = () => {
+    if (!emailValue || !passwordValue) {
+      seterr("Please fill in all fields");
+    } else {
+      const msg = checkValidData(emailValue, passwordValue);
+    seterr(msg)
+    }
+  };
+  
 
   return (
     <div className="fixed inset-y-0 right-0 z-50">
@@ -61,6 +85,7 @@ const Drawer = ({ isOpen, onClose }) => {
                   variant="filled"
                   size="medium"
                   className="w-80 mt-2"
+                  onChange={(e) => setusername(e.target.value)}
                 />
               ) : null}
             </div>
@@ -71,6 +96,8 @@ const Drawer = ({ isOpen, onClose }) => {
                 variant="filled"
                 size="medium"
                 className="w-80"
+                value={emailValue}
+                onChange={(e) => setEmailValue(e.target.value)}
               />
             </div>
             <div className="ml-3 mt-6">
@@ -80,14 +107,21 @@ const Drawer = ({ isOpen, onClose }) => {
                 variant="filled"
                 size="medium"
                 className="w-80"
+                type="password"
+                value={passwordValue}
+                onChange={(e) => setPasswordValue(e.target.value)}
               />
+            { <p className="text-red-500 ml-1">{err}</p>}
             </div>
             <div className="ml-3 mt-6 w-80">
-              <Button variant="outlined">{signin ? 'Login' : 'Sign in'}</Button>
+              <Button variant="outlined" onClick={handleLoginButtonClick}>{signin ? 'Login' : 'Sign in'}</Button>
+             
             </div>
+            <Oauthlogin />
           </div>
         </div>
       </div>
+     
     </div>
   );
 };

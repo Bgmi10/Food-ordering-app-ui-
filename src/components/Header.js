@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faGift, faQuestionCircle, faChevronDown, faBars, faTimes , faUser  , faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 import Drawer from './Drawer';
+import Oauthuserprofile from './Oauthuserprofile'
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Header = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [menuicon, SetMenuicon] = useState(faBars);
   const [drawer, setDrawer] = useState(false);
+  const { isAuthenticated } = useAuth0();
+
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -62,14 +66,15 @@ const Header = () => {
               <FontAwesomeIcon icon={faQuestionCircle} className='text-gray-600 ' />
               <li className="py-2 px-4 text-gray-500 cursor-pointer hover:text-orange-500">Help</li>
             </div>
-            <div className='flex items-center'>
+           {!isAuthenticated && <div className='flex items-center'>
               <FontAwesomeIcon icon={faUser} className='text-gray-600 ' />
               <li className="py-2 px-4 text-gray-500 cursor-pointer hover:text-orange-500" onClick={handleDrawer}>Sign In</li>
-            </div>
+            </div>}
             <div className='flex items-center'>
               <FontAwesomeIcon icon={faCartArrowDown} className='text-gray-600 ' />
               <li className="py-2 px-4 text-gray-500 cursor-pointer hover:text-orange-500">Cart</li>
             </div>
+             {<Oauthuserprofile />}
           </ul>
         </div>
       </div>
