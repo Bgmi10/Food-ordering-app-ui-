@@ -1,23 +1,24 @@
 import React from 'react'
 import useFetchData from '../hooks/useFetchdata'
 import { CDN_url } from '../utils/constants'
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import {Fab} from '@mui/material';
-import { ArrowForward, ArrowBack, Star } from '@mui/icons-material';
+import { ArrowForward, ArrowBack, Star, More } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
+import Button from '@mui/material/Button';
+import { faArrowAltCircleDown } from '@fortawesome/free-solid-svg-icons/faArrowAltCircleDown';
 
 
 
 
- const Toprestaurant = ({}) => {
+const Moreres = () => {
 
 const data = useFetchData()
+const [showMore, setShowMore] = useState(false);
 
 
-const title = data?.data?.cards?.[1]?.card?.card?.header?.title
+
 const { restaurants } = data?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle || {};
 
 const carouselData = restaurants?.map((restaurant) => ({
@@ -61,6 +62,14 @@ const NextArrow = (props) => {
         <div className=" bg-gray-300 h-40 w-60 rounded-xl mt-4 animate-pulse"></div>
         <div className=" bg-gray-300 h-40 w-60 rounded-xl mt-4 animate-pulse"></div>
         <div className=" bg-gray-300 h-40 w-60 rounded-xl mt-4 animate-pulse"></div>
+        <div className=" bg-gray-300 h-40 w-60 rounded-xl mt-4 animate-pulse"></div>
+        <div className=" bg-gray-300 h-40 w-60 rounded-xl mt-4 animate-pulse"></div>
+        <div className=" bg-gray-300 h-40 w-60 rounded-xl mt-4 animate-pulse"></div>
+        <div className=" bg-gray-300 h-40 w-60 rounded-xl mt-4 animate-pulse"></div>
+        <div className=" bg-gray-300 h-40 w-60 rounded-xl mt-4 animate-pulse"></div>
+        <div className=" bg-gray-300 h-40 w-60 rounded-xl mt-4 animate-pulse"></div>
+        <div className=" bg-gray-300 h-40 w-60 rounded-xl mt-4 animate-pulse"></div>
+        <div className=" bg-gray-300 h-40 w-60 rounded-xl mt-4 animate-pulse"></div>
       </div>
     </div>
   );
@@ -75,22 +84,28 @@ const settings = {
   vertical: false,
   verticalSwiping: false,
   prevArrow: <PrevArrow />,
-  nextArrow : <NextArrow />
+  nextArrow : <NextArrow />  
+}
+const handleShowMore = () =>{
+  setShowMore(true)
 }
 
   return (
-    <div>
-      {
-        data.length === 0 ? <Shimmer /> :
+    <div className='flex'>
+      {!showMore && (
+                        <div className="ml-[600px] mt-8 mb-10">
+                          <Button  onClick={handleShowMore} variant="contained" >Show More <FontAwesomeIcon icon={faArrowAltCircleDown} className='ml-2'></FontAwesomeIcon></Button>
+                           
+                        </div>
+                    )}
+      {showMore && 
+        
         <React.Fragment>
-           <div className='font-bold text-2xl  ml-[170px] mt-8'>
-        {title}
-      </div>
-      <div>
-        <Slider  {...settings} className='ml-40 mt-6  h-auto w-auto  border-b-2  '>
+      <div className='grid grid-cols-4 ml-44 mb-6'>
+        
       {
   carouselData?.map(({ imageId, name,avgRating, deliveryTime , cuisines, itemDiscount}, index) => (
-    <div key={index}className=' hover:scale-105 cursor-pointer'>
+    <div key={index}className=' hover:scale-105 cursor-pointer '>
       <div className="relative">
   <img src={`${CDN_url}${imageId}`} alt={name} className='h-40 w-60 rounded-xl mt-4' />
   <span className="absolute top-0 left-[122px] z-10 opacity-80 bg-gradient-to-tl from-black text-white p-2 font-extrabold  rounded-lg "> {itemDiscount} </span>
@@ -106,16 +121,16 @@ const settings = {
   ))
 }
 
-</Slider>
 
       </div>
 
         </React.Fragment>
       }
+      
      
     </div>
   )
 }
 
 
-export default Toprestaurant
+export default Moreres

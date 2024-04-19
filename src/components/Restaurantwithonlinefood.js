@@ -11,6 +11,7 @@
     import MenuItem from '@mui/material/MenuItem';
     import FormControl from '@mui/material/FormControl';
     import Select from '@mui/material/Select';
+    import Moreres from './Moreres';
    
 
 
@@ -40,7 +41,7 @@
         deliveryTime: restaurant.info.sla.slaString,
         cuisines:restaurant.info.cuisines.join(', '),
         itemDiscount : restaurant.info.costForTwo
-        }));
+        })).slice(0,8);
 
 
         
@@ -164,6 +165,8 @@
 
                 </React.Fragment>
             }
+  <Moreres />
+           
             
 
             </div>

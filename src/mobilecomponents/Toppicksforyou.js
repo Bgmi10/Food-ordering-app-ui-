@@ -52,7 +52,7 @@ const Toppicksforyou = () => {
         {carouselData.map((restaurant, index) => (
           <div key={index} className="flex flex-col items-center ml-3 ">
             <img src={`${CDN_url}${restaurant.imageId}`} alt="" className="h-20 w-20 rounded-lg mb-2" />
-            <span className="absolute top-0 left-[142px] text-[9px] z-10 opacity-20 bg-black text-white p-2 font-extrabold  rounded-lg "> {restaurant.itemDiscount} ADD </span>
+            <span className=" "> {restaurant.itemDiscount === true ? <div className='absolute top-0 left-[156px] text-[9px] z-10 opacity-20 bg-black text-white p-2 font-extrabold  rounded-lg'>add</div> :null } </span>
             <div className='text-sm text-gray-600'>{restaurant.name.slice(0,11)}</div>
             <div className='text-sm  text-gray-400'>{restaurant.deliveryTime}</div>
           </div>
