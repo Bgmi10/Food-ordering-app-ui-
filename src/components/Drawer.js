@@ -1,23 +1,24 @@
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState, useSyncExternalStore } from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { checkValidData } from '../utils/validate';
-import { useAuth0 } from "@auth0/auth0-react";
-import Oauthlogin from './Oauthlogin';
+import Oauthlogin from '../Oauth/Oauthlogin';
+import {  createUserWithEmailAndPassword  , signInWithEmailAndPassword} from "firebase/auth";
+import {auth} from '../utils/firebase'
 
 
 
-const Drawer = ({ isOpen, onClose }) => {
+const Drawer = ({ isOpen, onClose,handleSignUpRedirect }) => {
   const [signin, setsignin] = useState(true);
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [username, setusername] = useState('');
   const [err, seterr] = useState("")
+  const [loginerr,setloginerr] = useState('')
 
-  const { loginWithRedirect } = useAuth0();
-
+  
   const toggleSignin = () => {
     setsignin(!signin);
   };
@@ -26,12 +27,43 @@ const Drawer = ({ isOpen, onClose }) => {
   
 
   const handleLoginButtonClick = () => {
-    if (!emailValue || !passwordValue) {
-      seterr("Please fill in all fields");
-    } else {
-      const msg = checkValidData(emailValue, passwordValue);
-    seterr(msg)
-    }
+
+        if (!emailValue || !passwordValue ) {
+          seterr("Please fill in all fields");
+        } else {
+          const msg = checkValidData(emailValue, passwordValue);
+        seterr(msg)
+        }
+
+        createUserWithEmailAndPassword(auth, emailValue, passwordValue,username)
+        .then((userCredential) => {
+        
+        const user = userCredential.user;
+        
+      
+})
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    seterr(errorMessage)
+   
+    // ..
+  });
+  
+  signInWithEmailAndPassword(auth, emailValue, passwordValue, username )
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    
+    
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setloginerr(errorMessage)
+  });
+
   };
   
 
@@ -52,7 +84,7 @@ const Drawer = ({ isOpen, onClose }) => {
           <div className="py-4 px-6 relative">
             <button
               onClick={onClose}
-              className="text-gray-400 py-2 px-1 text-3xl font-thin absolute top-0 left-1 z-30"
+              className="text-gray-400 py-2 px-1 text-3xl font-thin absolute top-0 left-4 z-30"
             >
               <FontAwesomeIcon icon={faClose} />
             </button>
@@ -78,20 +110,21 @@ const Drawer = ({ isOpen, onClose }) => {
             </div>
             <div className="whitespace-nowrap ml-3">&#8209;&#8209;&#8209;&#8209;&#8209;</div>
             <div className="ml-3 mt-5">
-              {!signin ? (
+              {!signin  && (
                 <TextField
-                  id="filled-basic"
+                  id="1"
                   label="Name"
                   variant="filled"
                   size="medium"
                   className="w-80 mt-2"
+                  value={username}
                   onChange={(e) => setusername(e.target.value)}
                 />
-              ) : null}
+              )  }
             </div>
             <div className="ml-3 mt-6">
               <TextField
-                id="filled-basic"
+                id="2"
                 label="E-mail"
                 variant="filled"
                 size="medium"
@@ -111,7 +144,10 @@ const Drawer = ({ isOpen, onClose }) => {
                 value={passwordValue}
                 onChange={(e) => setPasswordValue(e.target.value)}
               />
-            { <p className="text-red-500 ml-1">{err}</p>}
+          {  !signin && <p className="text-red-500 ml-1"> {err} </p>}
+          { signin && <p className="text-red-500 ml-1">{loginerr}</p>}
+
+          
             </div>
             <div className="ml-3 mt-6 w-80">
               <Button variant="outlined" onClick={handleLoginButtonClick}>{signin ? 'Login' : 'Sign in'}</Button>
