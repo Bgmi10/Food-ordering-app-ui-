@@ -4,23 +4,23 @@ import Oauthsignout from "./Oauthsignout";
 import { Login } from "@mui/icons-material";
 
 const Profile = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   const [isHovered, setIsHovered] = useState(false);
 
 const handleclick = () =>{
     setIsHovered(!isHovered)
 }
 
+     
   return (
     isAuthenticated && (
       <div className="relative inline-block">
-        <img
+       <img
           src={user.picture}
           alt={user.name}
           className="h-10 w-10 ml-0 cursor-pointer"
           onClick={handleclick}
 
-   
         />
         {isHovered && (
           <div

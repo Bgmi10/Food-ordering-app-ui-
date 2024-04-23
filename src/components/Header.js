@@ -4,6 +4,7 @@ import { faSearch, faGift, faQuestionCircle, faChevronDown, faBars, faTimes , fa
 import Drawer from './Drawer';
 import Oauthuserprofile from '../Oauth/Oauthuserprofile'
 import { useAuth0 } from "@auth0/auth0-react";
+import AuthWrapper from './Authwrapper'
 
 const Header = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -11,6 +12,8 @@ const Header = () => {
   const [drawer, setDrawer] = useState(false);
   const { isAuthenticated } = useAuth0();
   const mobile  = window.innerWidth <= 768
+   
+  const [hidesigninbutton, sethidesigninbutton] = useState(window.location.pathname === '/login')
 
 
   const toggleMobileMenu = () => {
@@ -45,6 +48,7 @@ const Header = () => {
           </h2>
         </div>
      { mobile ? <div className=' mt-1 mr-3'> <Oauthuserprofile /></div> : null} 
+     
         <div className="lg:hidden">
       
           <button
@@ -70,7 +74,7 @@ const Header = () => {
               <FontAwesomeIcon icon={faQuestionCircle} className='text-gray-600 ' />
               <li className="py-2 px-4 text-gray-500 cursor-pointer hover:text-orange-500">Help</li>
             </div>
-           {!isAuthenticated && <div className='flex items-center'>
+           {!isAuthenticated && !hidesigninbutton && <div className='flex items-center'>
               <FontAwesomeIcon icon={faUser} className='text-gray-600 ' />
               <li className="py-2 px-4 text-gray-500 cursor-pointer hover:text-orange-500" onClick={handleDrawer}>Sign In</li>
             </div>}
@@ -78,13 +82,15 @@ const Header = () => {
               <FontAwesomeIcon icon={faCartArrowDown} className='text-gray-600 ' />
               <li className="py-2 px-4 text-gray-500 cursor-pointer hover:text-orange-500">Cart</li>
             </div>
+            <AuthWrapper />
              <Oauthuserprofile />
           </ul>
         </div>
        
       </div>
      
-     
+      {hidesigninbutton ? null :   <AuthWrapper />}
+      
       {isMobileMenuOpen && (
         <div className="lg:hidden flex justify-center   ">
           <ul className="flex flex-col space-y-2">
@@ -109,6 +115,11 @@ const Header = () => {
               <FontAwesomeIcon icon={faCartArrowDown} className='text-gray-600 ' />
               <li className="py-2 px-4 text-gray-500 cursor-pointer hover:text-orange-500 ">Cart</li>
 
+            </div>
+            <div className='flex items-center border-b-2'>
+             
+              <li className="py-6 px-5 ml-16   text-gray-500 cursor-pointer hover:text-orange-500 "></li>
+             <AuthWrapper />
             </div>
           
           </ul>

@@ -5,25 +5,32 @@ import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { checkValidData } from '../utils/validate';
 import Oauthlogin from '../Oauth/Oauthlogin';
-import {  createUserWithEmailAndPassword  , signInWithEmailAndPassword} from "firebase/auth";
+import {  createUserWithEmailAndPassword  , signInWithEmailAndPassword,} from "firebase/auth";
 import {auth} from '../utils/firebase'
+import { useNavigate } from 'react-router-dom';
 
 
 
-const Drawer = ({ isOpen, onClose,handleSignUpRedirect }) => {
+
+
+
+const Drawer = ({ isOpen, onClose }) => {
   const [signin, setsignin] = useState(true);
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [username, setusername] = useState('');
   const [err, seterr] = useState("")
   const [loginerr,setloginerr] = useState('')
+  const navigate = useNavigate()
+  
+ 
 
   
   const toggleSignin = () => {
     setsignin(!signin);
   };
 
- 
+  
   
 
   const handleLoginButtonClick = () => {
@@ -39,6 +46,7 @@ const Drawer = ({ isOpen, onClose,handleSignUpRedirect }) => {
         .then((userCredential) => {
         
         const user = userCredential.user;
+        navigate('/')
         
       
 })
@@ -54,6 +62,7 @@ const Drawer = ({ isOpen, onClose,handleSignUpRedirect }) => {
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
+    navigate('/login')
     
     
     // ...
@@ -64,7 +73,10 @@ const Drawer = ({ isOpen, onClose,handleSignUpRedirect }) => {
     setloginerr(errorMessage)
   });
 
+
+
   };
+
   
 
   return (
@@ -89,7 +101,7 @@ const Drawer = ({ isOpen, onClose,handleSignUpRedirect }) => {
               <FontAwesomeIcon icon={faClose} />
             </button>
             <img
-              src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/Image-login_btpq7r"
+               src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/Image-login_btpq7r"
               alt="Shakes"
               className="absolute top-8  right-5 w-24 h-24 object-cover z-20"
             />

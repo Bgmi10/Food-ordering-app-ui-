@@ -10,6 +10,7 @@ import Banner from '../mobilecomponents/Banner'
 
 
 
+
 const Body = () => {
 
   const mobile  = window.innerWidth <= 768;
