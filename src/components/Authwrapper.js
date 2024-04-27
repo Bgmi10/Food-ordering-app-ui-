@@ -8,38 +8,43 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 const AuthWrapper = () => {
   const [isFirebaseAuth, setIsFirebaseAuth] = useState(false);
-  const { isAuthenticated: isAuth0Auth, logout } = useAuth0(); // Destructuring logout for OAuth sign-out
+  const { isAuthenticated: isAuth0Auth, logout } = useAuth0(); 
   const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setIsFirebaseAuth(!!user); // Convert user to boolean
+      setIsFirebaseAuth(!!user); 
+    
     });
 
-    return () => unsubscribe(); // Clean up the listener when the component is unmounted
+    return () => unsubscribe(); 
   }, []);
 
   const handleSignOut = () => {
     if (isFirebaseAuth) {
       signOut(auth)
         .then(() => {
-          navigate('/'); // Redirect to home after signing out
+          navigate('/'); 
         })
         .catch((error) => console.error('Error signing out:', error));
     } else if (isAuth0Auth) {
-      logout({ returnTo: window.location.origin }); // Auth0 sign-out
+      logout({ returnTo: window.location.origin }); 
     }
   };    
 
-  const isAuthenticated = isFirebaseAuth || isAuth0Auth; // Determine if user is authenticated
+  const isAuthenticated = isFirebaseAuth || isAuth0Auth;
+  
+  const resdetail = window.location.pathname === '/resdetail'
 
   return (
     <div>
-      {isAuthenticated ? (
-        <Button onClick={handleSignOut} >Sign Out</Button> // Show sign-out button if user is authenticated
+      {isAuthenticated   ? (
+        <Button onClick={handleSignOut} >Sign Out</Button> 
       ) : (
-        <Drawer isOpen={true} onClose={() => {}} /> // Show the drawer for login/signup if user is not authenticated
+        !resdetail &&  <Drawer isOpen={true} onClose={() => {}} />
       )}
+
+      
     </div>
   );
 };

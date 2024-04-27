@@ -6,26 +6,25 @@ import {Fab} from '@mui/material';
 import { ArrowForward, ArrowBack } from '@mui/icons-material';
 import useFetchData from '../hooks/useFetchdata';
 import img from '../imgs/shimmer.jpg'
-import { CDN_url } from '../utils/constants';
+import { CDN_url } from '../utils/constants';   
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const Rescard = () => {
  
-
+  const { user , isAuthenticated } = useAuth0();
   const data = useFetchData()
   const title = data?.data?.cards?.[0]?.card?.card?.header?.title;
-
-  
-
   const carosuelImages = data?.data?.cards?.[0]?.card?.card?.imageGridCards?.info.map((item)=> item.imageId)
+  
+  
   const PrevArrow = (props) => {
     const { onClick } = props;
     return (
       <div onClick={onClick} style={{ position: 'absolute', top: '-8%', left: '88%', transform: 'translateY(-50%)', zIndex: 1 }} className="cursor-pointer text-3xl text-gray-400">
-       
-        <Fab size='small'>
+      <Fab size='small'>
       <ArrowBack />
-    </Fab>
+      </Fab>
       </div>
     );
   };
@@ -36,7 +35,7 @@ const Rescard = () => {
       <div onClick={onClick} style={{ position: 'absolute', top: '-8%', right: '3%', transform: 'translateY(-50%)', zIndex: 1 }} className="cursor-pointer text-3xl text-gray-600">
       <Fab size='small'>
       <ArrowForward />
-    </Fab>
+      </Fab>
       </div>
     );
   };
@@ -67,7 +66,7 @@ const Rescard = () => {
       { data.length === 0 ? <Shimmer /> :
       <React.Fragment >
       <div className="font-bold text-2xl  ml-[170px] mt-3">
-        {title}
+       { isAuthenticated && user.name }{isAuthenticated && ','} {title}
       </div>
       
       <div>
@@ -78,8 +77,10 @@ const Rescard = () => {
             <img
               src={`${CDN_url}${imageId}`}
               alt={`Carousel Image ${index + 1}`}
-              className="h-auto w-auto"
+              className="h-auto w-auto cursor-pointer"
+
             />
+
           </div>
         ))}
       </Slider>

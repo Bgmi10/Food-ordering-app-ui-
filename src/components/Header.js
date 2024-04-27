@@ -89,7 +89,7 @@ const Header = () => {
        
       </div>
      
-      {hidesigninbutton ? null :   <AuthWrapper />}
+      {/* {hidesigninbutton ? null :   <AuthWrapper />} */}
       
       {isMobileMenuOpen && (
         <div className="lg:hidden flex justify-center   ">

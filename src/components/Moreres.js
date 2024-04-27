@@ -2,7 +2,7 @@ import React from 'react'
 import useFetchData from '../hooks/useFetchdata'
 import { CDN_url } from '../utils/constants'
 import {Fab} from '@mui/material';
-import { ArrowForward, ArrowBack, Star, More } from '@mui/icons-material';
+import { ArrowForward, ArrowBack } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';

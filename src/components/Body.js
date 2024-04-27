@@ -11,16 +11,20 @@ import Banner from '../mobilecomponents/Banner'
 
 
 
+
+
 const Body = () => {
 
   const mobile  = window.innerWidth <= 768;
   return (
+   
   <div>
     {mobile ? 
     <>
     <Mobilerescrousel />
     <Toppicksforyou />
     <Banner />
+    
     </>
     :
     <div>
@@ -32,6 +36,7 @@ const Body = () => {
     }
 
     </div>
+    
   )
 }
 

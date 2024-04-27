@@ -7,25 +7,32 @@ const Profile = () => {
   const { user, isAuthenticated } = useAuth0();
   const [isHovered, setIsHovered] = useState(false);
 
-const handleclick = () =>{
-    setIsHovered(!isHovered)
-}
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
      
   return (
     isAuthenticated && (
-      <div className="relative inline-block">
+      <div className="relative inline-block"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}>
        <img
           src={user.picture}
           alt={user.name}
           className="h-10 w-10 ml-0 cursor-pointer"
-          onClick={handleclick}
+          
 
         />
         {isHovered && (
           <div
             className="absolute top-full left-[-350%] transform -translate-x-1/2 bg-white border border-gray-200 shadow-md rounded-lg p-8 z-10"
-            style={{ minWidth: "200px" }}
+            style={{  visibility: isHovered ? "visible" : "hidden" }}
           >
             <div className="flex items-center mb-4 mr-2">
               <img
