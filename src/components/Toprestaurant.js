@@ -8,10 +8,11 @@ import { Fab } from '@mui/material';
 import { ArrowForward, ArrowBack } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
+import {Link,useParams} from 'react-router-dom'
 
 const Toprestaurant = () => {
   const data = useFetchData();
-
+  const {id } = useParams();
   const title = data?.data?.cards?.[1]?.card?.card?.header?.title;
   const { restaurants } = data?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle || {};
 
@@ -22,6 +23,7 @@ const Toprestaurant = () => {
     deliveryTime: restaurant.info.sla.slaString,
     cuisines: restaurant.info.cuisines.join(', '),
     itemDiscount: restaurant.info.costForTwo,
+    resID: restaurant.info.id
   }));
 
   const PrevArrow = (props) => {
@@ -100,8 +102,11 @@ const Toprestaurant = () => {
           <div className="font-bold text-2xl ml-[170px] mt-8">{title}</div>
           <div>
             <Slider {...settings} className="ml-40 mt-6 h-auto w-auto border-b-2">
-              {carouselData?.map(({ imageId, name, avgRating, deliveryTime, cuisines, itemDiscount }, index) => (
-                <div key={index} className="hover:scale-105 cursor-pointer">
+              {carouselData?.map(({ imageId, name, avgRating, deliveryTime, cuisines, itemDiscount ,resID}, index) => (
+                
+               
+                <div key={index} className="hover:scale-105 cursor-pointer" >
+                  <Link to={`/resdetail/${resID}`}>
                   <div className="relative">
                     <img src={`${CDN_url}${imageId}`} alt={name} className="h-40 w-60 rounded-xl mt-4" />
                     <span
@@ -115,7 +120,9 @@ const Toprestaurant = () => {
                     <FontAwesomeIcon icon={faStarHalfAlt} className="text-sm mb-1 text-green-500" /> {avgRating} . {deliveryTime}
                   </p>
                   <p className="text-gray-500">{cuisines}</p>
+                  </Link>
                 </div>
+               
               ))}
             </Slider>
           </div>
