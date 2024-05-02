@@ -10,7 +10,7 @@ export const Itemcatagory = () => {
   const filterres = restaurantCards.filter(
     (c) => c.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
   );
- // issue component rendering  threee times 
+ // issue component rendering  threee times usememo not working 
 
 
   return (
