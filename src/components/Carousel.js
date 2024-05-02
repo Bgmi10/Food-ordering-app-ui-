@@ -43,14 +43,14 @@ const Rescard = () => {
 
    const settings = {
     dots: false,
-    infinite : false ,
     speed : 500,
     slidesToShow: 7,
     slidesToScroll : 3,
     vertical: false,
     verticalSwiping: false,
     prevArrow: <PrevArrow />,
-    nextArrow : <NextArrow />
+    nextArrow : <NextArrow />,
+    
   }
   const Shimmer = () =>{
     return(
