@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import { faArrowAltCircleDown } from '@fortawesome/free-solid-svg-icons/faArrowAltCircleDown';
 
 
@@ -107,8 +109,8 @@ const handleShowMore = () =>{
   carouselData?.map(({ imageId, name,avgRating, deliveryTime , cuisines, itemDiscount}, index) => (
     <div key={index}className=' hover:scale-105 cursor-pointer '>
       <div className="relative">
-  <img src={`${CDN_url}${imageId}`} alt={name} className='h-40 w-60 rounded-xl mt-4' />
-  <span className="absolute top-0 left-[122px] z-10 opacity-80 bg-gradient-to-tl from-black text-white p-2 font-extrabold  rounded-lg "> {itemDiscount} </span>
+  <LazyLoadImage src={`${CDN_url}${imageId}`} alt={name} className='h-40 w-60 rounded-xl mt-4' effect='blur' />
+  <span className="absolute top-4 left-[124px] z-10 opacity-80 bg-gradient-to-tl from-black text-white p-2 font-extrabold  rounded-xl "> {itemDiscount} </span>
 </div>
 
       <p className='text-xl text-gray-800'>{name}</p>

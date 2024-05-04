@@ -10,6 +10,8 @@ import { CDN_url } from '../utils/constants';
 import { useAuth0 } from "@auth0/auth0-react";
 
 
+
+
 const Rescard = () => {
  
   const { user , isAuthenticated } = useAuth0();
@@ -50,6 +52,7 @@ const Rescard = () => {
     verticalSwiping: false,
     prevArrow: <PrevArrow />,
     nextArrow : <NextArrow />,
+    infinite: false,
     
   }
   const Shimmer = () =>{

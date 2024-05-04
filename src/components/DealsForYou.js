@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import useTopresdetail from '../hooks/useTopresdetail';
 import {Fab} from '@mui/material';
-import { ArrowForward, ArrowBack } from '@mui/icons-material';
+import { ArrowForward, ArrowBack } from '@mui/icons-material';  
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -10,7 +10,7 @@ import { Topicsres } from './Topicsres';
 import { CDN_url } from '../utils/constants';
 import { Itemcatagory } from './Itemcatagory';
 
-export const DealsForYou = () => {
+ const DealsForYou = () => {
 
 
   const { resID } = useParams(); 
@@ -99,3 +99,6 @@ export const DealsForYou = () => {
     </div>
   );
 };
+
+
+export default DealsForYou

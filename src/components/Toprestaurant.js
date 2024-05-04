@@ -9,6 +9,10 @@ import { ArrowForward, ArrowBack } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import {Link,useParams} from 'react-router-dom'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
+
 
 const Toprestaurant = () => {
   const data = useFetchData();
@@ -108,9 +112,12 @@ const Toprestaurant = () => {
                 <div key={index} className="hover:scale-105 cursor-pointer" >
                   <Link to={`/resdetail/${resID}`}>
                   <div className="relative">
-                    <img src={`${CDN_url}${imageId}`} alt={name} className="h-40 w-60 rounded-xl mt-4" />
+                   
+                    <LazyLoadImage 
+                      src={`${CDN_url}${imageId}`} alt={name} className="h-40 w-60 rounded-xl mt-4"
+                      effect="blur" />
                     <span
-                      className="absolute top-0 left-[122px] z-10 opacity-80 bg-gradient-to-tl from-black text-white p-2 font-extrabold rounded-lg"
+                      className="absolute top-4 left-[124px] z-10 opacity-80 bg-gradient-to-tl from-black text-white p-2 font-extrabold rounded-xl"
                     >
                       {itemDiscount}
                     </span>

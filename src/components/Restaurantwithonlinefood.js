@@ -1,17 +1,19 @@
-    import React, { useEffect } from 'react'
-    import useFecthdata from '../hooks/useFetchdata'
-    import {Fab} from '@mui/material';
-    import { CDN_url } from '../utils/constants';
-    import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-    import { faStarHalfAlt ,faFilterCircleDollar, } from '@fortawesome/free-solid-svg-icons';
-    import { useState } from 'react';
-    import Shimmer from './Shimmer';
-    import Box from '@mui/material/Box';
-    import InputLabel from '@mui/material/InputLabel';
-    import MenuItem from '@mui/material/MenuItem';
-    import FormControl from '@mui/material/FormControl';
-    import Select from '@mui/material/Select';
-    import Moreres from './Moreres';
+ import React, { useEffect } from 'react'
+ import useFecthdata from '../hooks/useFetchdata'
+ import {Fab} from '@mui/material';
+ import { CDN_url } from '../utils/constants';
+ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+ import { faStarHalfAlt ,faFilterCircleDollar, } from '@fortawesome/free-solid-svg-icons';
+ import { useState } from 'react';
+ import Shimmer from './Shimmer';
+ import Box from '@mui/material/Box';
+ import InputLabel from '@mui/material/InputLabel';
+ import MenuItem from '@mui/material/MenuItem';
+ import FormControl from '@mui/material/FormControl';
+ import Select from '@mui/material/Select';
+ import Moreres from './Moreres';
+ import { LazyLoadImage } from 'react-lazy-load-image-component';
+ import 'react-lazy-load-image-component/src/effects/blur.css';
    
 
 
@@ -148,8 +150,9 @@
     carouselData?.map(({ imageId, name,avgRating, deliveryTime , cuisines, itemDiscount}, index) => (
         <div key={index}className=' hover:scale-105 cursor-pointer '>
         <div className="relative ">
-    <img src={`${CDN_url}${imageId}`} alt={name} className='h-40 w-60 rounded-xl mt-4 text-' />
-    <span className="absolute top-0 left-[122px] z-10 opacity-80 bg-gradient-to-tl from-black text-white p-2 font-extrabold  rounded-lg "> {itemDiscount} </span>
+    
+    <LazyLoadImage  src={`${CDN_url}${imageId}`} alt={name} className='h-40 w-60 rounded-xl mt-4 ' effect='blur'/>
+    <span className="absolute top-4 left-[124px] z-10 opacity-80 bg-gradient-to-tl from-black text-white p-2 font-extrabold  rounded-xl "> {itemDiscount} </span>
     </div>
 
         <p className='text- xl text-gray-800'>{name}</p>

@@ -1,12 +1,14 @@
-import React from 'react';
+import React , {Suspense} from 'react';
 import { useParams } from 'react-router-dom';
 import useTopresdetail from '../hooks/useTopresdetail';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStarHalfAlt } from '@fortawesome/free-solid-svg-icons'; 
 import { CDN_url } from '../utils/constants';
-import { DealsForYou } from './DealsForYou';
 
 
+
+
+const DealsForYou = React.lazy(() => import('./DealsForYou'));
 
 export const ToprestaurantDetail = () => {
   const { resID } = useParams(); 
@@ -56,7 +58,7 @@ export const ToprestaurantDetail = () => {
       
       </p>  : null} 
       <div className='flex justify-between'>
-      <img src='https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_40,h_40/v1648635511/Delivery_fee_new_cjxumu' alt='' className='w-5 h-5 mt-[5px]'  ></img>
+      <img src='https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_40,h_40/v1648635511/Delivery_fee_new_cjxumu' alt='' className='w-5 h-5 mt-[5px]'   effect='blur'/>
       <p className='ml-2 mt-[3px] text-neutral-600 text-md'>{km} {feeDetails}  {'₹'}{totalFee /100}</p>
       </div> 
       
@@ -75,9 +77,9 @@ export const ToprestaurantDetail = () => {
 
  
 </div>
-<DealsForYou />
-
-
+<Suspense fallback={<div>Loading...</div>}>
+        <DealsForYou />
+      </Suspense>
 </div>
   );
 };

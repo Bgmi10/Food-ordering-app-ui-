@@ -1,11 +1,10 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Body from './components/Body';
 import {ToprestaurantDetail} from './components/ToprestaurantDetail';
 import NotFound from './components/NotFound';
 import Breadcrumb from './components/Breadcrumbs';
-
 
 
 
