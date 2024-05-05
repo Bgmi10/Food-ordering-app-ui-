@@ -22,7 +22,7 @@ export const ToprestaurantDetail = () => {
   const imageId = resdetail?.cloudinaryImageId
   const minDeliveryTime = resdetail?.sla.minDeliveryTime
   const maxDeliveryTime = resdetail?.sla.maxDeliveryTime
-  const feeDetails = resdetail?.feeDetails?.message.slice(27)
+  const feeDetails = resdetail?.feeDetails?.message
   const km = resdetail?.sla?.lastMileTravelString
   const totalFee = resdetail?.feeDetails?.totalFee
   const availability = resdetail?.availability?.nextOpenTimeMessage
@@ -59,7 +59,7 @@ export const ToprestaurantDetail = () => {
       </p>  : null} 
       <div className='flex justify-between'>
       <img src='https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_40,h_40/v1648635511/Delivery_fee_new_cjxumu' alt='' className='w-5 h-5 mt-[5px]'   effect='blur'/>
-      <p className='ml-2 mt-[3px] text-neutral-600 text-md'>{km} {feeDetails}  {'₹'}{totalFee /100}</p>
+      {!feeDetails ? <p className='text-red-500 ml-2'>This location is outside the outlet's delivery area</p> :<p className='ml-2 mt-[3px] text-neutral-600 text-md'>{km} {feeDetails}  {'₹'}{totalFee /100}</p>}
       </div> 
       
     

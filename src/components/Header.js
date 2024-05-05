@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faGift, faQuestionCircle, faChevronDown, faBars, faTimes , faUser  , faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faGift, faQuestionCircle, faChevronDown, faBars, faTimes , faUser  } from '@fortawesome/free-solid-svg-icons';
 import Drawer from './Drawer';
 import Oauthuserprofile from '../Oauth/Oauthuserprofile'
 import { useAuth0 } from "@auth0/auth0-react";
 import AuthWrapper from './Authwrapper'
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 
 const Header = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,8 +15,11 @@ const Header = () => {
   const [drawer, setDrawer] = useState(false);
   const { isAuthenticated } = useAuth0();
   const mobile  = window.innerWidth <= 768
-   
   const [hidesigninbutton, sethidesigninbutton] = useState(window.location.pathname === '/login')
+  const cartitems = useSelector((store)=> store.cart.items)
+  
+  
+  
 
 
   const toggleMobileMenu = () => {
@@ -58,11 +64,11 @@ const Header = () => {
             <FontAwesomeIcon icon={menuicon} className="h-6 w-6" />
           </button>
         </div>
-        <div className="hidden lg:flex">
-          <ul className="flex space-x-4 ">
-            <div className="hidden lg:flex items-center">
-              <div className="flex items-center mr-4">
-                <FontAwesomeIcon icon={faSearch} className='text-gray-500 p-1' />
+        <div className="hidden lg:flex ">
+          <ul className="flex space-x-2 ">
+            <div className="hidden lg:flex items-center ">
+              <div className="flex items-center mr-2">
+                <FontAwesomeIcon icon={faSearch} className='text-gray-500  ' />
                 <li className="text-gray-500 py-2 px-4 rounded-md cursor-pointer hover:text-orange-500">Search</li>
               </div>
             </div>
@@ -79,8 +85,9 @@ const Header = () => {
               <li className="py-2 px-4 text-gray-500 cursor-pointer hover:text-orange-500" onClick={handleDrawer}>Sign In</li>
             </div>}
             <div className='flex items-center'>
-              <FontAwesomeIcon icon={faCartArrowDown} className='text-gray-600 ' />
-              <li className="py-2 px-4 text-gray-500 cursor-pointer hover:text-orange-500">Cart</li>
+              
+             <Link to="/cart"> <li className="py-2 px-4 text-gray-500 cursor-pointer hover:text-orange-500"> <span className='border px-2  bg-green-400 text-white'  >{cartitems.length}</span> Cart</li>
+             </Link>
             </div>
             <AuthWrapper />
              <Oauthuserprofile />
@@ -112,8 +119,8 @@ const Header = () => {
               <li className="py-2 px-4 text-gray-500 cursor-pointer hover:text-orange-500" onClick={handleDrawer}>Sign In</li>
             </div>
             <div className='flex items-center border-b-2'>
-              <FontAwesomeIcon icon={faCartArrowDown} className='text-gray-600 ' />
-              <li className="py-2 px-4 text-gray-500 cursor-pointer hover:text-orange-500 ">Cart</li>
+             
+              <li className="py-2 px-4 text-gray-500 cursor-pointer hover:text-orange-500"> <span className='border px-2  bg-green-400 text-white'  >{cartitems.length}</span> Cart</li>
 
             </div>
             <div className='flex items-center border-b-2'>

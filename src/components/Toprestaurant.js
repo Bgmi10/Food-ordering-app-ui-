@@ -8,7 +8,7 @@ import { Fab } from '@mui/material';
 import { ArrowForward, ArrowBack } from '@mui/icons-material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
-import {Link,useParams} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
@@ -16,8 +16,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const Toprestaurant = () => {
   const data = useFetchData();
-  const {id } = useParams();
-  const title = data?.data?.cards?.[1]?.card?.card?.header?.title;
+   const title = data?.data?.cards?.[1]?.card?.card?.header?.title;
   const { restaurants } = data?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle || {};
 
   const carouselData = restaurants?.map((restaurant) => ({

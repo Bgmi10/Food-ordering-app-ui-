@@ -8,8 +8,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStarHalfAlt } from '@fortawesome/free-solid-svg-icons'; 
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { useDispatch } from 'react-redux';
+import {additem} from '../utils/addTocartslice'
+import { toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
+
 
  const AccordionUsage = ({ data }) => {
+
+  const dispatch = useDispatch()
+ 
+
+  const handleclick = (itemCard)=>{
+    return ()=>cartclick(itemCard)
+   
+  }
+  const cartclick = (itemCard) =>{
+    dispatch(additem(itemCard))
+    toast.success(`Added ${itemCard.card?.info?.name} to cart!`)
+    
+  }
   return (
     <div className="ml-56 mr-52 mb-6 mt-2">
       {data.map((item, index) => (
@@ -49,7 +67,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
                   </div>
 
                   
-                  {itemCard.card?.info?.imageId && (
+                  {itemCard.card?.info?.imageId ? (
                     <div className="relative flex-shrink-0">
                        <LazyLoadImage
                         src={`${CDN_url}${itemCard.card?.info?.imageId }`}
@@ -59,12 +77,13 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
                          
                       />
 
-                      <span className="absolute top-[1px] right-[1px] opacity-100 cursor-pointer bg-gradient-to-tl from-black text-white p-2 font-extrabold rounded-lg">
-                        Add +
+                      <span className="absolute top-[1px] right-[1px] opacity-100 cursor-pointer bg-gradient-to-tl from-black text-white p-2 font-extrabold rounded-lg" onClick={handleclick(itemCard) } >
+                      Add +
                       </span>
                     </div>
                     
-                  )}
+                  ) : <div className='text-red-500 mb-8'>
+                    item not available</div>}
                 </div>
               ))}
             </div>
