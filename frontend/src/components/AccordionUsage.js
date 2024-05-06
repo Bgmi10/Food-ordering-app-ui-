@@ -50,15 +50,16 @@ import 'react-toastify/dist/ReactToastify.css';
                     <div className="text-lg font-semibold">
                       {itemCard.card?.info?.name || 'Unknown Name'}
                     </div>
-
-                    <div className="font-normal">
-                      {'₹'}{itemCard.card?.info.price / 100}
-                    </div>
+                  <div>
+                  {  !itemCard?.card?.info?.price ? null :<div className="font-normal">
+                      {'₹'}{ itemCard?.card?.info?.price / 100  }
+                    </div>}
+                  </div>   
 
                     <div className="text-gray-500 mt-2 text-md">
                       <FontAwesomeIcon icon={faStarHalfAlt} className="text-sm mb-1 text-green-500" />
-                      {itemCard.card?.info?.ratings?.aggregatedRating?.rating || 'N/A'} 
-                      ({itemCard.card?.info?.ratings?.aggregatedRating?.ratingCountV2 || 'N/A'})
+                      {itemCard.card?.info?.ratings?.aggregatedRating?.rating || itemCard.card?.info?.avgRatingString || null} 
+                      {(itemCard.card?.info?.ratings?.aggregatedRating?.ratingCountV2  || null)}
                     </div>
 
                     <div className="text-sm text-gray-400 break-words max-w-xs"> 
