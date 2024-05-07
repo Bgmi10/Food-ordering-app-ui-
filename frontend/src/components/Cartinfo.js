@@ -14,7 +14,6 @@ import { Button } from '@mui/material';
 
 const Cartinfo = () => {
     const cartitems = useSelector((store) => store.cart.items);
-    console.log(cartitems)
     const [isExpanded , setExpanded] = useState(true)
     const totalBill = cartitems.reduce((acc, itemCard)=> {
         return acc + (itemCard?.card?.info?.price  || 0) /100

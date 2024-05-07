@@ -10,6 +10,7 @@ import appStore from './utils/appStore';
 import Cartinfo from './components/Cartinfo';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Searchbar from './components/Searchbar';
 
 
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/resdetail/:resID" element={<ToprestaurantDetail />} />
           <Route path="*" element={<NotFound />} />
           <Route path='/cart' element={<Cartinfo />} />
+          <Route path="/search" element={<Searchbar />} />
         
       
         </Routes>

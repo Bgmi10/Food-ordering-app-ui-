@@ -29,7 +29,7 @@ import 'react-toastify/dist/ReactToastify.css';
     
   }
   return (
-    <div className="ml-56 mr-52 mb-6 mt-2">
+    <div className="ml-56 mr-52 mb-16 mt-2">
       {data.map((item, index) => (
         <Accordion key={index}>
           <AccordionSummary
@@ -95,6 +95,7 @@ import 'react-toastify/dist/ReactToastify.css';
           </AccordionActions>
         </Accordion>
       ))}
+      
     </div>
   );
 };

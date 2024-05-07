@@ -1,20 +1,24 @@
 import React from 'react';
 import useTopresdetail from '../hooks/useTopresdetail';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCartFlatbed, faCartShopping, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Fab } from '@mui/material';
 import { ArrowForward, ArrowBack } from '@mui/icons-material';
 import { CDN_url } from '../utils/constants';
-
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export const Topicsres = () => {
   const data = useTopresdetail(); 
   const restaurantCards = data?.data?.cards?.[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
   const toppiccarosuel = restaurantCards?.[1]?.card?.card?.carousel;
   const topPickstitle = restaurantCards?.[1]?.card?.card?.title || 'Top Picks'; 
+  const cartitem = useSelector((store)=>store.cart.items)
+ 
+ 
   
   const validCarouselData = Array.isArray(toppiccarosuel) ? toppiccarosuel.map((item) => item.creativeId) : [];
 
@@ -73,9 +77,17 @@ export const Topicsres = () => {
           </div>
         ))}
       </Slider> : null}
-
+      {cartitem.length >= 1 ? (
+      <div className='fixed bottom-0 w-[833px] bg-green-500 z-20 ml-56  '>
+        <Link to='/cart'>
+        <p className=' text-white border w-full text-md  font-thin flex justify- items-center h-12 p-2 transition-opacity duration-300 ease-in-out opacity-100 '>{cartitem.length} item  <p className='ml-[650px] font-medium' >view cart <FontAwesomeIcon icon={faCartShopping} />  </p></p>
+  
+        </Link>
+      </div> 
+      ): null}
       <p className="flex justify-center text-gray-500 space-x-2">
         <FontAwesomeIcon icon={faCheckCircle} className="mt-[4px] m-1" />
+       
         MENU
         <FontAwesomeIcon icon={faCheckCircle} className="mt-[4px] m-1" />
       </p>

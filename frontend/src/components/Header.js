@@ -67,10 +67,12 @@ const Header = () => {
         <div className="hidden lg:flex ">
           <ul className="flex space-x-2 ">
             <div className="hidden lg:flex items-center ">
+              <Link to='/search'>
               <div className="flex items-center mr-2">
                 <FontAwesomeIcon icon={faSearch} className='text-gray-500  ' />
                 <li className="text-gray-500 py-2 px-4 rounded-md cursor-pointer hover:text-orange-500">Search</li>
               </div>
+              </Link>
             </div>
             <div className='flex items-center'>
               <FontAwesomeIcon icon={faGift} className='text-gray-500' />
@@ -101,10 +103,13 @@ const Header = () => {
       {isMobileMenuOpen && (
         <div className="lg:hidden flex justify-center   ">
           <ul className="flex flex-col space-y-2">
+           
             <div className='flex items-center border-b-2'>
+            <Link to='/search'>
               
               <FontAwesomeIcon icon={faSearch} className='text-gray-500 p-1 ' />
               <li className="py-2 px-4  text-gray-500 cursor-pointer hover:text-orange-500 mr-40 ">Search</li>
+            </Link> 
             </div>
             <div className='flex items-center border-b-2'>
               <FontAwesomeIcon icon={faGift} className='text-gray-500' />
