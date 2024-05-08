@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { faArrowAltCircleDown } from '@fortawesome/free-solid-svg-icons/faArrowAltCircleDown';
+import { Link } from 'react-router-dom';
 
 
 
@@ -29,7 +30,8 @@ const carouselData = restaurants?.map((restaurant) => ({
   avgRating:restaurant.info.avgRating,
   deliveryTime: restaurant.info.sla.slaString,
   cuisines:restaurant.info.cuisines.join(', '),
-  itemDiscount : restaurant.info.costForTwo
+  itemDiscount : restaurant.info.costForTwo, 
+  resID : restaurant.info.id
 }));
 
 
@@ -106,7 +108,8 @@ const handleShowMore = () =>{
       <div className='grid grid-cols-4 ml-44 mb-6'>
         
       {
-  carouselData?.map(({ imageId, name,avgRating, deliveryTime , cuisines, itemDiscount}, index) => (
+  carouselData?.map(({ imageId, name,avgRating, deliveryTime , cuisines, itemDiscount, resID}, index) => (
+    <Link to={`/resdetail/${resID}`}>
     <div key={index}className=' hover:scale-105 cursor-pointer '>
       <div className="relative">
   <LazyLoadImage src={`${CDN_url}${imageId}`} alt={name} className='h-40 w-60 rounded-xl mt-4' effect='blur' />
@@ -120,6 +123,7 @@ const handleShowMore = () =>{
      
 <p className='text-gray-500'>{cuisines}</p>
     </div>
+    </Link>
   ))
 }
 
@@ -131,6 +135,7 @@ const handleShowMore = () =>{
       
      
     </div>
+    
   )
 }
 

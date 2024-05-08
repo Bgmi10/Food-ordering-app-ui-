@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import {  cdn_url_1 } from '../utils/constants'
 import Presearch from './Presearch'
+import Rescard from './Carousel'
 
  const Searchbar = () => {
     const [search,setsearch] = useState('')
@@ -57,13 +58,13 @@ import Presearch from './Presearch'
            />
            <FontAwesomeIcon icon={faSearch} 
            onClick={handelclik}
-           className='z-3 mt-3 lg:mr-40 absolute   top-1/2 transform -translate-y-1/2 text-gray-500 text-md cursor-pointer  sm: right-[70px] '/>
+           className='z-3 mt-3 lg:mr-40 absolute   top-1/2 transform -translate-y-1/2 text-gray-500 text-md cursor-pointer  sm: right-[80px] '/>
         </div>
         
-       { notfound ? <p>search not found</p>:(
-            <div>
+       { notfound ? < p className='ml-[210px] mt-3 font-bold '>search not found</p>:(
+            <div >
             {
-                search_results?.map((item,index)=>(
+                 ( !search_results ?  <Presearch /> : search_results?.map((item,index)=>(
                     <div key={index} className='flex items-center  hover:border cursor-pointer sm: justify- ' >
                          <img src={`${cdn_url_1}${item.cloudinaryId}`} alt='' className='lg:ml-52 h-20 w-20 p-2 m-2 rounded-2xl '></img>
                          <div className='ml-1 flex flex-col mb-7 sm: mr-22' >
@@ -72,8 +73,9 @@ import Presearch from './Presearch'
                         </div>
                        
 
-             </div>
+             </div >
                 ))
+              )
             }
         </div>)}
     </div>

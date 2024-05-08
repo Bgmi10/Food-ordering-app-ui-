@@ -12,7 +12,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 
 
-const Rescard = () => {
+const Rescard = ({name}) => {
  
   const { user , isAuthenticated } = useAuth0();
   const data = useFetchData()
@@ -69,7 +69,7 @@ const Rescard = () => {
       { data.length === 0 ? <Shimmer /> :
       <React.Fragment >
       <div className="font-bold text-2xl  ml-[170px] mt-3">
-       { isAuthenticated && user.name }{isAuthenticated && ','} {title}
+       { isAuthenticated && user.name }{isAuthenticated && ','} {title} 
       </div>
       
       <div>

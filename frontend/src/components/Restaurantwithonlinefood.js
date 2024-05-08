@@ -13,6 +13,7 @@
  import Select from '@mui/material/Select';
  import Moreres from './Moreres';
  import { LazyLoadImage } from 'react-lazy-load-image-component';
+ import { Link } from 'react-router-dom';
  import 'react-lazy-load-image-component/src/effects/blur.css';
    
 
@@ -42,7 +43,8 @@
         avgRating:restaurant.info.avgRating,
         deliveryTime: restaurant.info.sla.slaString,
         cuisines:restaurant.info.cuisines.join(', '),
-        itemDiscount : restaurant.info.costForTwo
+        itemDiscount : restaurant.info.costForTwo,
+        resId : restaurant.info.id
         })).slice(0,8);
 
 
@@ -144,39 +146,38 @@
         </div>
     
     </div>
-
-            <div className='grid grid-cols-4  ml-44 '>
+ 
+    <div className='grid grid-cols-4  ml-44 '>
             {
-    carouselData?.map(({ imageId, name,avgRating, deliveryTime , cuisines, itemDiscount}, index) => (
+        carouselData?.map(({ imageId, name,avgRating, deliveryTime , cuisines, itemDiscount, resId}, index) => (
+        <Link to={`/resdetail/${resId}`}>
         <div key={index}className=' hover:scale-105 cursor-pointer '>
         <div className="relative ">
     
-    <LazyLoadImage  src={`${CDN_url}${imageId}`} alt={name} className='h-40 w-60 rounded-xl mt-4 ' effect='blur'/>
-    <span className="absolute top-4 left-[124px] z-10 opacity-80 bg-gradient-to-tl from-black text-white p-2 font-extrabold  rounded-xl "> {itemDiscount} </span>
-    </div>
+        <LazyLoadImage  src={`${CDN_url}${imageId}`} alt={name} className='h-40 w-60 rounded-xl mt-4 ' effect='blur'/>
+        <span className="absolute top-4 left-[124px] z-10 opacity-80 bg-gradient-to-tl from-black text-white p-2 font-extrabold  rounded-xl "> {itemDiscount} </span>
+        </div>
 
         <p className='text- xl text-gray-800'>{name}</p>
         
         <p className='text-gray-600'>  <FontAwesomeIcon icon={faStarHalfAlt} className=' text-sm mb-1 text-green-500 ' /> {avgRating}  .   {deliveryTime}</p>
         
         
-    <p className='text-gray-500'>{cuisines}</p>
+        <p className='text-gray-500'>{cuisines}</p>
         </div>
-    ))
-    }
-            </div>
+        </Link>
+       ))
+      }
+      
+    </div>
 
-                </React.Fragment>
-            }
-  <Moreres />
-           
-            
-
-            </div>
+    </React.Fragment>
+        }
+        <Moreres />
+    </div>
 
     
-    )
-    }
+)}
 
 
 
